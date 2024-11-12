@@ -19,24 +19,36 @@ input::-webkit-inner-spin-button {
 } */
 
 div .MuiTextField-root {
-    width: 15vw;
-    min-width: 150px;
+    width: 35vw;
+    max-width: 400px;
+    min-width: 80px;
 }
 
 form {
-  width: 60vw;
-  min-width: 600px;
+  width: 55%;
+  min-width: 400px;
+  margin: 32px;
 }
 
+
 #resultTable {
-  width: 40vw;
+  width: 35%;
   min-width: 400px;
+  margin: 32px;
+}
+
+#resultTable thead {
+  background-color: #eeeeee;
+}
+
+.Section {
+  margin-bottom: 16px;
 }
 
 div #mainBody {
   display: flex;
   flex-direction: row;
-  flex-wrap: 1;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: baseline;
   justify-content: center;
 }

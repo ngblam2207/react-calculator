@@ -17,7 +17,6 @@ const Applicant = () => {
             {state.applicants.map((applicant, index) => (
             <TableBody key={index}>
                 <TableRow>
-                    <TableCell rowSpan={3}>Applicant {applicant.instanceId}</TableCell>
                     <TableCell>
                         <TextField 
                             size="small"
@@ -44,9 +43,9 @@ const Applicant = () => {
                         </TextField>
 
                     </TableCell>
-                    <TableCell rowSpan={3}>
+                    <TableCell rowSpan={3} >
                         <Button onClick={() => handleDeleteInstance(applicant.instanceId, 'applicants')}>
-                            Delete
+                            Delete Applicant
                         </Button>
                     </TableCell>
                 </TableRow>
@@ -107,11 +106,11 @@ const Applicant = () => {
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell colSpan={6}>
-                                {/* There will always be one instance in incomes array */}
-                                {applicant.incomes.map((income, index) => (
-                                    <Incomes key={index} applicant={applicant} />
-                                ))}
+                    <TableCell colSpan={3}>
+                        {/* There will always be one instance in incomes array */}
+                        {applicant.incomes.map((income, index) => (
+                            <Incomes key={index} applicant={applicant} />
+                        ))}
                     </TableCell>
                 </TableRow>
                 

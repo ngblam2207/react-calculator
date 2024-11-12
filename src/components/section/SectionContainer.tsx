@@ -26,7 +26,7 @@ const SectionContainer = ({
     const handleAddInstance = useHandleAddInstance();
 
     return (
-        <Paper elevation={3} sx={sectionContainerStyle}>
+        <Paper elevation={3} className="Section">
             {/* Section header including */}
             <Box sx={headerStyle} >
                 {/* Section header with number of instance */}

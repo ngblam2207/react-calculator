@@ -4,7 +4,7 @@ import { useAppState } from "./context/AppContext";
 import SectionContainer from "./components/section/SectionContainer";
 import Commitments from "./components/Commitments/Commitments";
 import { headerStyle, sectionContainerStyle } from "./styles/sectionStyles";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import Expenses from "./components/Expenses/Expenses";
 import ProposedLoan from "./components/Loans/ProposedLoan";
 import useHandleSubmit from "./utils/handleSubmit";
@@ -50,11 +50,11 @@ const Body = () => {
     //   fetch();
     // }, [])
 
-    const [results, setResults] = useState<Record<number, number>>({});
+    const [results, setResults] = useState<BankType[]>([]);
     return (
         <div id="mainBody">
             <form>
-                <Paper elevation={3} sx={sectionContainerStyle}>
+                <Paper elevation={3} className="Section">
                     <Box sx={headerStyle}>
                         <Typography variant="h5">{'Proposed Loan'}</Typography>
                     </Box>
@@ -85,7 +85,7 @@ const Body = () => {
                     children={<Commitments/>}
                 />
 
-                <Paper elevation={3} sx={sectionContainerStyle}>
+                <Paper elevation={3} className="Section">
                     <Box sx={headerStyle}>
                         <Typography variant="h5">{'Expenses'}</Typography>
                     </Box>
@@ -95,19 +95,38 @@ const Body = () => {
 
                 <div>
                     <button type="submit" onClick={(event) => handleSubmit(event, setResults)}>Calculate</button>
-
                 </div>
                 
             </form>
-            <table id="resultTable" style={{border:"1 solid black"}}>
-                <tbody>
-                    <tr>
-                        <th>Index</th>
-                        <th>Bank Name</th>
-                        <th>Max borrowing</th>
-                    </tr>
-                </tbody>
-            </table>
+            <Paper elevation={3} id="resultTable">
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>
+                                <Typography variant="h5" align="center">Index</Typography>
+                            </TableCell>
+                            <TableCell>
+                                <Typography variant="h5" align="center">Bank Name</Typography>
+                            </TableCell>
+                            <TableCell>
+                                <Typography variant="h5" align="center">Maximum Borrow</Typography>
+                            </TableCell>
+                        </TableRow>
+
+                    </TableHead>
+                    <TableBody>
+                        {
+                            results.map((result, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>{result.id}</TableCell>
+                                    <TableCell>{result.name}</TableCell>
+                                    <TableCell>{result.maximumBorrow}</TableCell>
+                                </TableRow>
+                            ))
+                        }
+                    </TableBody>
+                </Table>
+            </Paper>
         </div>
     )
 }

@@ -6,6 +6,7 @@ import useHandleDeleteNested from '../../utils/handleDeleteNested';
 import { useAppState } from '../../context/AppContext';
 import { useState } from 'react';
 import { KeyboardArrowUp, KeyboardArrowDown } from '@mui/icons-material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const Property = () => {
@@ -32,9 +33,13 @@ const Property = () => {
                                 onChange={(event) => handleChange(event, 'properties', property)}
                             />
                         </TableCell>
-                        <TableCell rowSpan={2}>
-                            <Button onClick={() => handleDeleteInstance(property.instanceId, 'properties', 'loans')}>
-                                Delete
+                        <TableCell rowSpan={1}>
+                            <Button 
+                                size="small"
+                                variant="outlined"
+                                onClick={() => handleDeleteInstance(property.instanceId, 'properties', 'loans')}
+                            >
+                                Delete Property
                             </Button>
                         </TableCell>
                     </TableRow>
@@ -69,13 +74,6 @@ const Property = () => {
                                 onChange={(event) => handleChange(event, 'properties', property)}
                             />
                         </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell colSpan={2} align='center'>
-                            <IconButton onClick={() => setCollapse(!collapse)}>
-                                {collapse ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}
-                            </IconButton>
-                        </TableCell>
                         <TableCell>
                             <Button onClick={() => {
                                     handleAddNested( property, 'loans');
@@ -83,6 +81,13 @@ const Property = () => {
                                 }}>
                                 Add Loan
                             </Button>
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell colSpan={3} align='center'>
+                            <IconButton onClick={() => setCollapse(!collapse)}>
+                                {collapse ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}
+                            </IconButton>
                         </TableCell>
                     </TableRow>
                     <TableRow>
@@ -123,7 +128,12 @@ const Property = () => {
                                                 />
                                             </TableCell>
                                             <TableCell rowSpan={2}>
-                                                <Button onClick={() => handleDeleteNested(property, loan.instanceId, 'loans')}>
+                                                <Button 
+                                                    size="small"
+                                                    variant="contained"
+                                                    startIcon={<DeleteIcon />}
+                                                    onClick={() => handleDeleteNested(property, loan.instanceId, 'loans')}
+                                                >
                                                 Delete Loan
                                                 </Button>
                                             </TableCell>

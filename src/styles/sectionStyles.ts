@@ -1,9 +1,8 @@
 
 
 export const sectionContainerStyle = {
-  minWidth: "600px",
+  minWidth: "550px",
   maxWidth: "1280px",
-  width: "auto",
   margin: "32px",
 };
 
@@ -30,6 +29,7 @@ export const headerStyle = {
   },
   button: {
     bgcolor: "transparent",
+    color: "black",
   },
 };
 
