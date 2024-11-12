@@ -61,22 +61,24 @@ const useHandleSubmit = () => {
         // Using axios post request, change URL as needed
         // then(response) will out put response data to display on screen
         try {
-        const response =  axios
+        const response =  await axios
         .post("http://localhost:5267/api/wcb/serviceability/ServiceabilityResult/", application)
         .then((response) => {
-            console.log("Response: ", response.data);
+            // response.data is constructed from backend as an array of numbers (maximumBorrow)
+            // Cast the response.data (any type) to an Object that has an array of numbers
             const data = Object.values<number>(response.data);
-            console.log(banks);
-            banks.map((bank, index) => {
-                bank.maximumBorrow = data[index];
-                console.log(`Bank ID: ${index} - ${bank.name}, max borrow: ${bank.maximumBorrow}`);
-                // if (bank.maximumBorrow === null || bank.maximumBorrow === 0 || bank.maximumBorrow === undefined)
-                // {
-                //     bank.maximumBorrow = data[index];
-                // }
-            })
-            console.log(banks);
-            setResults(response.data);
+
+            // Do not mutate the state of banks directly, instead create updated array and update
+            // the state of this array so React can detect change
+            // Updating the banks directly using map can cau unexpected behavior since
+            // the reference to the same object (banks) remain the same
+            const updatedResults = banks.map((bank, index) => {
+                return {
+                    ...bank,
+                    maximumBorrow: data[index]
+                };
+            });
+            setResults(updatedResults);
         })
         .catch((error) => {
             if (error.response) {
