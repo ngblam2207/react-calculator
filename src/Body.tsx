@@ -112,6 +112,9 @@ const Body = () => {
                                 <Typography variant="h5">Bank Name</Typography>
                             </TableCell>
                             <TableCell>
+                                <Typography variant="h5">Interest Rate</Typography>
+                            </TableCell>
+                            <TableCell>
                                 <Typography variant="h5">Maximum Borrow</Typography>
                             </TableCell>
                         </TableRow>
@@ -123,6 +126,7 @@ const Body = () => {
                                 <TableRow key={index}>
                                     <TableCell>{result.id}</TableCell>
                                     <TableCell>{result.name}</TableCell>
+                                    <TableCell>{result.interestRate}%</TableCell>
                                     <TableCell>{result.maximumBorrow}</TableCell>
                                 </TableRow>
                             ))

@@ -4,6 +4,13 @@ import { handleAddInstanceButton, headerStyle, sectionContainerStyle } from "../
 import { Add, ExpandLess, ExpandMore } from "@mui/icons-material";
 import useHandleAddInstance from "../../utils/handleAddInstance";
 
+// Define a finite enum of maximum instances allowed for each instanceType
+enum MAXINSTANCES  {
+    applicants = 2,
+    properties = 10,
+    commitments = 8,
+}
+
 // Section Container properties
 // children contains instances within the section
 interface SectionProps {
@@ -25,6 +32,10 @@ const SectionContainer = ({
 
     const handleAddInstance = useHandleAddInstance();
 
+    // Check if the Add button should be disabled when numberOfInstances exceed MAXIMUMINSTANCES
+    // as keyof typeof is a Typescript Syntax to indicate using instanceType as key to find number
+    const isAddButtonDisabled = numberOfInstances >= MAXINSTANCES[instanceType as keyof typeof MAXINSTANCES];
+
     return (
         <Paper elevation={3} className="Section">
             {/* Section header including */}
@@ -35,6 +46,7 @@ const SectionContainer = ({
                 <Button
                     variant="contained"
                     startIcon={<Add/>}
+                    disabled={ isAddButtonDisabled }
                     onClick={() => {
                         handleAddInstance(instanceType);
                         // if the current section container is collapsed, expand when add new instance
