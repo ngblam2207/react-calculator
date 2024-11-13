@@ -6,7 +6,12 @@ type BankType = {
     creditCardRate: number,
     loading: number,
     hems?: [],
-    maximumBorrow: number
+    maximumBorrow: number,
+    monthlyRepayment: number,
+    totalCommitments: number,
+    totalIncome: number,
+    totalExpense: number,
+    NDI_Ratio: number,
 }
 
 export default BankType;

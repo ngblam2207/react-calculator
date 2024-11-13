@@ -8,7 +8,7 @@ import useHandleAddInstance from "../../utils/handleAddInstance";
 enum MAXINSTANCES  {
     applicants = 2,
     properties = 10,
-    commitments = 8,
+    commitments = 18,
 }
 
 // Section Container properties

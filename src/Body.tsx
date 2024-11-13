@@ -4,51 +4,19 @@ import { useAppState } from "./context/AppContext";
 import SectionContainer from "./components/section/SectionContainer";
 import Commitments from "./components/Commitments/Commitments";
 import { headerStyle, sectionContainerStyle } from "./styles/sectionStyles";
-import { Box, Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Collapse, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import Expenses from "./components/Expenses/Expenses";
 import ProposedLoan from "./components/Loans/ProposedLoan";
 import useHandleSubmit from "./utils/handleSubmit";
 import { useEffect, useState } from "react";
 import BankType from "./components/BankType";
-import axios from "axios";
-import apps from "./api/apps";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 const Body = () => {
     const state = useAppState();
     const handleSubmit = useHandleSubmit();
 
-    // // Using useEffect hook with axios async await to fetch data from server
-    // const [banks, setBanks] = useState<BankType[]>([]);
-    // // Fetch data at load time so the dependencies must be an empty array
-    // useEffect(() => {
-    //   const fetch = async () => {
-    //     try {
-    //       // Define the response
-    //       const response = await apps.get('/api/wcb/serviceability/banks');
-
-    //       // This point indicate the response is already within 200 rage
-    //       console.log(response);
-
-    //       setBanks(response.data.banks);
-    //       console.log('Fetch successfully');
-
-    //     } catch (err: any) {
-    //       // axios automatically catch any response error outside 200 range
-        
-    //       if (err.response) {
-    //         // Not within 200 response range
-    //         console.log(err.response.data);
-    //         console.log(err.response.status);
-    //         console.log(err.response.headers);
-    //       } else {
-    //         // Some unknown error
-    //         console.log(`Error: ${err.message}`);
-    //       }
-    //     }
-    //   }
-
-    //   fetch();
-    // }, [])
+    const [open, setOpen] = useState(false);    // Use for collapsing result table
 
     const [results, setResults] = useState<BankType[]>([]);
     return (
@@ -106,13 +74,13 @@ const Body = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>
+                                <Typography variant="h5">Details</Typography>
+                            </TableCell>
+                            <TableCell>
                                 <Typography variant="h5">Index</Typography>
                             </TableCell>
                             <TableCell>
                                 <Typography variant="h5">Bank Name</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography variant="h5">Interest Rate</Typography>
                             </TableCell>
                             <TableCell>
                                 <Typography variant="h5">Maximum Borrow</Typography>
@@ -120,18 +88,51 @@ const Body = () => {
                         </TableRow>
 
                     </TableHead>
-                    <TableBody>
-                        {
-                            results.map((result, index) => (
-                                <TableRow key={index}>
+                    {
+                        results.map((result, index) => (
+                            <TableBody key={index}>
+                                <TableRow>
+                                    <TableCell>
+                                        <Button
+                                            size="small"
+                                            aria-label="Expand details"
+                                            onClick={() => setOpen(!open)}
+                                        >
+                                            {open ? <ExpandLess/> : <ExpandMore/>}
+                                        </Button>
+                                    </TableCell>
                                     <TableCell>{result.id}</TableCell>
                                     <TableCell>{result.name}</TableCell>
-                                    <TableCell>{result.interestRate}%</TableCell>
                                     <TableCell>{result.maximumBorrow}</TableCell>
                                 </TableRow>
-                            ))
-                        }
-                    </TableBody>
+                                <TableRow>
+                                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+                                        <Collapse in={open}>
+                                            <Box>
+                                                <Typography variant="h6" align="center">Details</Typography>
+                                                <Table size="small">
+                                                    <TableBody>
+                                                        <TableRow>
+                                                            <TableCell><b>Total Income:</b> {result.totalIncome}</TableCell>
+                                                            <TableCell><b>Floor Interest Rate:</b> {result.interestRate}</TableCell>
+                                                        </TableRow>
+                                                        <TableRow>
+                                                            <TableCell><b>Living Expense:</b> {result.totalExpense}</TableCell>
+                                                            <TableCell><b>Annual Commitment:</b> {result.totalCommitments.toFixed(2)}</TableCell>
+                                                        </TableRow>
+                                                        <TableRow>
+                                                            <TableCell><b>NDI Ratio:</b> {result.NDI_Ratio.toFixed(2)}</TableCell>
+                                                            <TableCell><b>Monthly Repayment:</b> {result.monthlyRepayment.toFixed(2)}</TableCell>
+                                                        </TableRow>
+                                                    </TableBody>
+                                                </Table>
+                                            </Box>
+                                        </Collapse>
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        ))
+                    }
                 </Table>
             </Paper>
         </div>

@@ -66,7 +66,7 @@ const useHandleSubmit = () => {
         .then((response) => {
             // response.data is constructed from backend as an array of numbers (maximumBorrow)
             // Cast the response.data (any type) to an Object that has an array of numbers
-            const data = Object.values<number>(response.data);
+            const data = Object.values<number[]>(response.data);
 
             // Do not mutate the state of banks directly, instead create updated array and update
             // the state of this array so React can detect change
@@ -75,7 +75,12 @@ const useHandleSubmit = () => {
             const updatedResults = banks.map((bank, index) => {
                 return {
                     ...bank,
-                    maximumBorrow: data[index]
+                    maximumBorrow: data[index][0],
+                    monthlyRepayment: data[index][1],
+                    totalCommitments: data[index][2],
+                    totalIncome: data[index][3],
+                    totalExpense: data[index][4],
+                    NDI_Ratio: data[index][5]
                 };
             });
             setResults(updatedResults);
