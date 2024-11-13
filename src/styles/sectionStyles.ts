@@ -28,8 +28,6 @@ export const headerStyle = {
     bgcolor: "#d9d9d9",
   },
   button: {
-    bgcolor: "transparent",
-    color: "black",
   },
 };
 

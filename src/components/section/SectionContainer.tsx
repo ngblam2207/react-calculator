@@ -1,7 +1,7 @@
 import { Box, Collapse, Button, Paper, IconButton, Typography, Stack } from "@mui/material";
 import { ReactNode, useState } from "react";
 import { handleAddInstanceButton, headerStyle, sectionContainerStyle } from "../../styles/sectionStyles";
-import { Add, KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import { Add, ExpandLess, ExpandMore } from "@mui/icons-material";
 import useHandleAddInstance from "../../utils/handleAddInstance";
 
 // Section Container properties
@@ -50,7 +50,7 @@ const SectionContainer = ({
 
             {/* Button to expand/collapse the section */}
             <IconButton onClick={() => setCollapse(!collapse)}>
-                {collapse ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}
+                {collapse ? <ExpandMore/> : <ExpandLess/>}
             </IconButton>
 
             {/* Expanding/Collapsing section */}

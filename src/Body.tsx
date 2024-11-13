@@ -4,7 +4,7 @@ import { useAppState } from "./context/AppContext";
 import SectionContainer from "./components/section/SectionContainer";
 import Commitments from "./components/Commitments/Commitments";
 import { headerStyle, sectionContainerStyle } from "./styles/sectionStyles";
-import { Box, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import Expenses from "./components/Expenses/Expenses";
 import ProposedLoan from "./components/Loans/ProposedLoan";
 import useHandleSubmit from "./utils/handleSubmit";
@@ -93,9 +93,12 @@ const Body = () => {
                 </Paper>
 
 
-                <div>
-                    <button type="submit" onClick={(event) => handleSubmit(event, setResults)}>Calculate</button>
-                </div>
+                <Button 
+                    type="submit" 
+                    variant="contained"
+                    onClick={(event) => handleSubmit(event, setResults)}>
+                    Calculate
+                </Button>
                 
             </form>
             <Paper elevation={3} id="resultTable">
@@ -103,13 +106,13 @@ const Body = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                <Typography variant="h5" align="center">Index</Typography>
+                                <Typography variant="h5">Index</Typography>
                             </TableCell>
                             <TableCell>
-                                <Typography variant="h5" align="center">Bank Name</Typography>
+                                <Typography variant="h5">Bank Name</Typography>
                             </TableCell>
                             <TableCell>
-                                <Typography variant="h5" align="center">Maximum Borrow</Typography>
+                                <Typography variant="h5">Maximum Borrow</Typography>
                             </TableCell>
                         </TableRow>
 

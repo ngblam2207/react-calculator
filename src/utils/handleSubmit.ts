@@ -39,6 +39,8 @@ const useHandleSubmit = () => {
 
     fetch();
     }, [])
+
+
     // Handle form submission
     const handleSubmit = async (event: any, setResults: any) => {
         // preventDefault to prevent page reloading
@@ -54,8 +56,6 @@ const useHandleSubmit = () => {
             expenses: state.expenses,
         };
         console.log(application);
-
-
 
 
         // Using axios post request, change URL as needed
